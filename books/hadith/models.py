@@ -25,7 +25,7 @@ class Translation(models.Model):
 
 class ContentSection(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    translation = models.ForeignKey(Translation, on_delete=models.CASCADE, related_name='content_sections')
+    translation = models.ForeignKey(Translation, on_delete=models.CASCADE,null=True, blank=True, related_name='content_sections')
     index = models.CharField(max_length=100)
     sub_index = models.CharField(max_length=100, blank=True, null=True)
     content = models.TextField()
@@ -34,5 +34,5 @@ class ContentSection(models.Model):
     class Meta:
         ordering = ['page_number']
 
-    def __str__(self):
-        return f"{self.translation.book.title} ({self.translation.language}) - {self.index} - {self.sub_index or 'No Sub Index'}"
+    # def __str__(self):
+    #     return f"{self.translation.book.title} ({self.translation.language}) - {self.index} - {self.sub_index or 'No Sub Index'}"
